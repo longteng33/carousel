@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>图片轮播</title>
+
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		a {
+			text-decoration: none;
+			color: #000;
+		}
+
+		body {
+			font-size: 14px;
+			font-family: Arial, '微软雅黑';
+			background: #2c2c2c;
+		}
+
+		ul {
+			list-style: none;
+		}
+
+		.box {
+			width: 936px;
+			height: 382px;
+			border-radius: 10px;
+			margin: 20px auto 0;
+			overflow: hidden;
+			position: relative;
+		}
+
+		.box_img {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.box_img ul li {
+			position: absolute;
+			height: 100%;
+			/* display: none; */
+		}
+
+		.box_img ul li a {
+			display: block;
+			height: 100%;
+			font-size: 100px;
+			text-align: center;
+			line-height: 250px;
+			color: #fff;
+		}
+
+		.box_img ul li a img {
+			width: 936px;
+		}
+
+		.box_tab {
+			position: absolute;
+			bottom: 10px;
+			right: 20px;
+			text-align: center;
+		}
+
+		.box_tab a {
+			display: inline-block;
+			padding: 2px 10px;
+			font-size: 10px;
+			background: #fff;
+			margin: 0 5px;
+			color: #333;
+		}
+
+		.box_tab a.active {
+			background: #09b;
+			color: #fff;
+		}
+
+		.box .btn {
+			position: absolute;
+			top: 50%;
+			margin-top: -20px;
+			display: block;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background: rgba(0, 28, 12, 0.3);
+			color: #ffffff;
+			text-align: center;
+			line-height: 40px;
+			cursor: pointer;
+			font-size: 30px;
+			user-select: none;
+		}
+
+		.box .btn:hover {
+			background: rgba(0, 28, 12, 0.6);
+		}
+
+		.box .prev {
+			left: 10px;
+		}
+
+		.box .next {
+			right: 10px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="box">
+		<div class="box_img">
+			<ul>
+				<li><a href="#"><img src="../img/1.jpg" alt=""></a></li>
+				<li><a href="#"><img src="../img/2.jpg" alt=""></a></li>
+				<li><a href="#"><img src="../img/3.jpg" alt=""></a></li>
+				<li><a href="#"><img src="../img/7.jpg" alt=""></a></li>
+				<li><a href="#"><img src="../img/5.jpg" alt=""></a></li>
+			</ul>
+		</div>
+		<div class="box_tab"></div>
+		<span class="btn prev">&lt</span>
+		<span class="btn next">&gt</span>
+	</div>
+
+	<ul class="container">
+		<li class="a"></li>
+		<li class="b"></li>
+		<li class="c"></li>
+		<li></li>
+	</ul>
+
+	<script src="./jquery-3.4.1.min.js"></script>
+	<script src="./carousel.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			// 动态添加圆点
+			for (var i = 1; i <= $('.box_img ul li').length; i++) {
+				$('.box_tab').append('<a href="javascript:">' + i + '</a>')
+			}
+			$('.box_tab a').eq(0).addClass('active')
+
+
+			// new Carousel必须写在构造函数Carousel之后
+			var carouselObj = new Carousel({
+				box: $('.box'),
+				img: $('.box_img ul li'),
+				dots: $('.box_tab a'),
+				prev: $(".box .prev"),
+				next: $(".box .next"),
+				intervalTime: 3000,
+				gradualTime: 600,
+				className: "active",
+			})
+
+		});
+
+	</script>
+
+</body>
+
+</html>
